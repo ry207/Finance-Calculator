@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yearly Income Calculator</title>
+
+    <link rel="icon" type="image/x-icon" href="dollar2.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title_header">
+        <h1>The Finance Calculator</h1>
+    </div>
+
+    <div class="directory_header">
+        <a href="index.html">Mortgage Calculator +</a>
+        <a href="stocks.html"> + Stocks P&L +</a>
+        <a href="yearly.html"> + Yearly Income +</a>
+    </div>
+
+    <div class="main_section">
+        <h1>Yearly Income Calculator</h1>
+        <p>Welcome to the Yearly Income Calculator! Enter your hourly wage and weekly hours to estimate your income before and after tax.</p>
+
+        <div class="calc_section">
+            <form id="calcForm">
+                <label for="hoursPerWeek">Hours per Week:</label><br>
+                <input type="number" id="hoursPerWeek" placeholder="e.g. 40" required><br>
+
+                <label for="hourlyWage">Hourly Wage ($):</label><br>
+                <input type="number" id="hourlyWage" step="0.01" placeholder="e.g. 15.00" required><br>
+
+                <label for="taxRate">Tax Rate (%):</label><br>
+                <input type="number" id="taxRate" step="0.1" placeholder="e.g. 20" value="20"><br><br>
+
+                <input type="submit" value="Calculate Income">
+            </form>
+
+            <div class="result" id="result" style="margin-top: 15px;">
+                <h4>6-Month Gross: —</h4>
+                <h4>Yearly Gross: —</h4>
+                <h4>Yearly After Tax: —</h4>
+                <h4>Tax Paid: —</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("calcForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const hours = parseFloat(document.getElementById("hoursPerWeek").value) || 0;
+            const wage = parseFloat(document.getElementById("hourlyWage").value) || 0;
+            const taxRate = parseFloat(document.getElementById("taxRate").value) / 100 || 0;
+
+            const weeklyGross = hours * wage;
+            const yearlyGross = weeklyGross * 52;
+            const sixMonthGross = yearlyGross / 2;
+            const taxAmount = yearlyGross * taxRate;
+            const yearlyNet = yearlyGross - taxAmount;
+
+            const fmt = n => n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+            result.innerHTML = `
+                <h4>6-Month Gross: ${fmt(sixMonthGross)}</h4>
+                <h4>Yearly Gross: ${fmt(yearlyGross)}</h4>
+                <h4 style="color:green;">Yearly After Tax: ${fmt(yearlyNet)}</h4>
+                <h4 style="color:red;">Tax Paid: ${fmt(taxAmount)}</h4>
+            `;
+        });
+    </script>
+</body>
+</html>

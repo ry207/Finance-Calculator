@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Calculator</title>
+
+    <link rel="icon" type="image/x-icon" href="dollar2.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title_header">
+        <h1>The Finance Calculator</h1>
+    </div>
+    <div class="directory_header">
+        <a href="index.html">Mortgage Calculator +</a>
+        <a href="stock.html"> + Stocks P&L +</a>
+        <a href="yearly.html"> + Yearly Income</a>
+    </div>
+    <div class="main_section">
+        <h1>Mortgage Calculator</h1>
+        <p>Welcome to the Mortgage Calculator! This is where you can calculate mortgage monthly payments.</p>
+
+        <div class="calc_section">
+            <form onsubmit="return get_values();">
+
+                <label for="hvalue">Home Value:</label><br>
+                <input type="number" id="homevalue" name="hvalue" value="250000">$<br>
+
+                <label for="downpay">Down Payment:</label><br>
+                <input type="number" id="downpayment" name="downpay" value="1000"><!--<input type="radio" value="downpay_dollar" id="downpay_dollar" name="downpay_type">$ <input type="radio" value="downpay_percent" id="downpay_percent" name="downpay_type">%-->$ <br>
+                
+                <label for="irate">Interest rate:</label><br>
+                <input type="number" id="interestrate" name="irate" value="6">%<br>
+                
+                <label for="loan_time">Loan Term:</label><br>
+                <input type="number" id="loan_term" name="loan_time" value="30">years<br><br>
+
+                <input type="submit" value="Submit" >
+            </form> 
+
+            <h4 id="monthly_text">Monthly Payment: </h4>
+        </div>
+    </div>
+
+
+
+    <script src="app.js"></script>
+</body>
+</html>
