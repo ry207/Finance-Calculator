@@ -15,18 +15,18 @@
 
     <div class="directory_header">
         <a href="index.html">Mortgage Calculator +</a>
-        <a href="stock.html"> + Stocks P&L +</a>
+        <a href="stocks.html"> + Stocks P&L +</a>
         <a href="yearly.html"> + Yearly Income</a>
     </div>
 
     <div class="main_section">
         <h1>Stocks Profit & Loss Calculator</h1>
-        <p>Welcome to the Stocks P&L Calculator! Enter your buy and sell prices, number of shares, and any costs to calculate your total profit or loss.</p>
+        <p>Welcome to the Stocks P&L Calculator! Enter your buy and sell prices, number of shares (including fractional), and any costs to calculate your total profit or loss.</p>
 
         <div class="calc_section">
             <form id="calcForm">
                 <label for="shares">Number of Shares:</label><br>
-                <input type="number" id="shares" placeholder="e.g. 100" required><br>
+                <input type="number" id="shares" step="any" placeholder="e.g. 100 or 0.5" required><br>
 
                 <label for="buyPrice">Buy Price per Share ($):</label><br>
                 <input type="number" id="buyPrice" step="0.01" placeholder="e.g. 10.50" required><br>
@@ -43,7 +43,6 @@
                 <input type="submit" value="Calculate Profit">
             </form>
 
-            <!-- Results now appear inside the same section -->
             <div class="result" id="result" style="margin-top: 15px;">
                 <h4>Buy Total: —</h4>
                 <h4>Sell Total: —</h4>
@@ -65,11 +64,18 @@
             const buyCost = parseFloat(document.getElementById("buyCost").value) || 0;
             const sellCost = parseFloat(document.getElementById("sellCost").value) || 0;
 
+            // Calculate totals and profit/loss
             const totalBuy = shares * buyPrice + buyCost;
             const totalSell = shares * sellPrice - sellCost;
             const profit = totalSell - totalBuy;
 
-            const fmt = n => n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+            // Format as USD currency
+            const fmt = n => n.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
 
             result.innerHTML = `
                 <h4>Buy Total: ${fmt(totalBuy)}</h4>
@@ -82,4 +88,3 @@
     </script>
 </body>
 </html>
-
