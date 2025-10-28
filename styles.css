@@ -16,7 +16,7 @@ body{
     position: absolute;
     left: 0;
     top: 70px;
-    height: 50px;
+    height: 100px;
     width: 100%;
     background: rgb(34, 34, 34);
     line-height: 50px;
@@ -28,7 +28,7 @@ body{
 }
 .main_section{
     position: absolute;
-    top: 150px;
+    top: 200px;
     width: 90%;
     height: 555px;
     left: 5%;
