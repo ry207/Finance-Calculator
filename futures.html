@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futures P&L Calculator</title>
+
+    <link rel="icon" type="image/x-icon" href="dollar2.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title_header">
+        <h1>The Finance Calculator</h1>
+    </div>
+
+    <div class="directory_header">
+        <a href="index.html">Mortgage Calculator +</a>
+        <a href="stocks.html"> + Stocks P&L +</a>
+        <a href="futures.html"> + Futures P&L +</a>
+        <a href="yearly.html"> + Yearly Income</a>
+    </div>
+
+    <div class="main_section">
+        <h1>Futures Profit & Loss Calculator</h1>
+        <p>Enter your contract details, price per contract, and buy/sell prices to calculate your total profit or loss.</p>
+
+        <div class="calc_section">
+            <form id="calcForm">
+                <label for="pricePerContract">Price Per Contract ($):</label><br>
+                <select id="pricePerContract" required>
+                    <option value="50">$50</option>
+                    <option value="100">$100</option>
+                    <option value="500">$500</option>
+                    <option value="1000">$1000</option>
+                </select><br><br>
+
+                <label for="contracts">Number of Contracts:</label><br>
+                <input type="number" id="contracts" step="any" placeholder="e.g. 2 or 0.5" required><br>
+
+                <label for="buyPrice">Buy Price ($):</label><br>
+                <input type="number" id="buyPrice" step="0.01" placeholder="e.g. 4350.25" required><br>
+
+                <label for="sellPrice">Sell Price ($):</label><br>
+                <input type="number" id="sellPrice" step="0.01" placeholder="e.g. 4375.50" required><br><br>
+
+                <input type="submit" value="Calculate Profit">
+            </form>
+
+            <div class="result" id="result" style="margin-top: 15px;">
+                <h4>Total Profit/Loss: —</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("calcForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const pricePerContract = parseFloat(document.getElementById("pricePerContract").value) || 0;
+            const contracts = parseFloat(document.getElementById("contracts").value) || 0;
+            const buyPrice = parseFloat(document.getElementById("buyPrice").value) || 0;
+            const sellPrice = parseFloat(document.getElementById("sellPrice").value) || 0;
+
+            // Futures P&L formula:
+            // (Sell Price - Buy Price) × Price Per Contract × Number of Contracts
+            const profit = (sellPrice - buyPrice) * pricePerContract * contracts;
+
+            const fmt = n => n.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+            result.innerHTML = `
+                <h4 style="color:${profit >= 0 ? 'green' : 'red'}">
+                    Total Profit/Loss: ${fmt(profit)}
+                </h4>
+            `;
+        });
+    </script>
+</body>
+</html>
